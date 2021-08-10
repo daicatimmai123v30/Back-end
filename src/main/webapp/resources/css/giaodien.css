@@ -1,0 +1,276 @@
+
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0%;
+    
+}
+.header{
+    position: relative;
+    display:flex;
+
+    background-image: url("https://rlv.zcache.com/svc/getimage?id=26d02b3d-4a25-451e-ae48-48aa3468e566&max_dim=1290&sharpness=0&image_type=webp");
+    width: 100%;
+    height:500px ;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    back
+    
+}
+.form-user{
+    right: 0px;
+    position: fixed;
+    width: 400px;
+    height: 700px;
+    z-index: 1;
+    background: white;
+    display: none;
+    border:2px solid #e4e4e4;
+}
+.form-user .form-user-hr{
+    height: 1px;
+    width: 80%;
+    margin: 1.5em auto ;
+    background: #e4e4e4;
+}
+.form-user .title-user{
+    width: 400px;
+
+    height:80px;
+    display: flex;
+}
+.form-user .title-user .icon{
+    width: 80px;
+    
+    height:80px ;
+}
+.form-user .title-user .icon .icon-user{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: red;
+    margin-top:15px;
+}
+.form-user .title-user  a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    padding-left:15px;
+    padding-top: 10px;
+
+}
+.form-user .title-user  a:hover{
+    color: orange ;
+}
+ .form-user .title-user .title-yearjoined{
+    font-size: 18px;
+}
+.form-user .title-account {
+    height: 250px;
+    width:80%;
+    margin: 1.5em auto;
+    
+}
+.form-user .title-account div{
+    height: 20%;
+    width:100%;
+    position: relative;
+}
+.form-user .title-stores,.form-user .login-logout{
+    height: 50px;
+    width:80%;
+    margin: 1.5em auto;
+}
+.form-user .title-stores{
+    height: 100px;
+}
+
+.form-user .title-stores div{
+    height: 50%;
+    width:100%;
+    position: relative;
+}
+.form-user .login-logout div{
+    height: 50%;
+    width:100%;
+    position: relative;
+
+}
+
+.form-user .title-account div a ,.form-user .title-stores div a,.form-user .login-logout div a{
+    position: absolute;
+    top:15px;
+    text-decoration: none;
+    color:black;
+
+}
+
+.form-user .title-account div a:hover{
+    color: orange;
+}
+
+.content{
+    
+    width:40%;
+    height: 60%;
+    position: absolute;
+    top: 150px;
+    left: 100px;
+}
+.content  input[type="button"]{
+    height: 40px;
+    width: 120px;
+    border-radius: 4px;
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+.content  input[type="button"]:hover{
+    background-color: white;
+    color: black;
+}
+.icon-home{
+    width:15%;
+    height: 50px;
+
+    
+}
+.icon-home h1{
+    margin: auto;
+    text-align: center;
+}
+.icon-home a{
+    color: white;
+    font-size: 100%;
+    font-family:cursive;
+    text-decoration: none;
+
+}
+.search-textbox { 
+    width: 65%;
+    height:50px;
+    position: relative;
+}
+.search-textbox input{
+    border-radius: 50px;
+    position: absolute;
+    top:15%;
+    padding-left:15px;
+    height: 60%;
+    width: 75%;
+    font-size: 20px;
+    border:2px solid wheat;
+
+}
+.search-textbox input:focus{
+    outline-style: none;
+}
+.icon{
+    width: 20%;
+    height: 50px;
+
+    
+}
+.icon .icon-user, .icon .icon-cart{
+
+    float: right;
+    height: 50px;
+    width: 50px;
+    margin: auto 10px;
+    border-radius: 50%;
+    background:white;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: center;
+}
+.icon .icon-user{
+    background-image: url("../img/Icon/user-shape.png");
+}
+.icon .icon-user:hover .form-user{
+    display: block;
+
+}
+.icon  .icon-cart{
+    background-image: url("../img/Icon/kisspng-shopping-cart-software-computer-icons-shopping-icon-5b3eb003e64f86.3664521015308349479434.png");
+}
+footer{
+    height: 200px;
+    box-sizing: border-box;
+}
+footer .footer-hr{
+    height: 2px;
+    width: 50%;
+    margin: 1.5em auto ;
+    background: #e4e4e4;
+}
+footer ul{
+    list-style-type: none;
+}
+
+footer .footer-center{
+    width: 65%;
+    margin: auto;
+    display: flex;
+
+}
+footer .footer-center ul{
+    width: 25%;
+}
+footer ul li a{
+    font-size: 15px;
+    color:#007acd;
+    text-decoration: none;
+    line-height: 1.5;
+}
+footer ul li a:hover{
+    color: orange;
+}
+footer .footer-icon{
+    width:  430px;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    text-align: center;
+
+}
+footer .footer-icon  div{
+    width: 30px;
+    height: 28px;
+    margin: 35px 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 50%;
+
+
+}
+footer .footer-icon .icon-facebook{
+    background-image: url("../img/Icon/facebook-circular-logo.png");
+}
+footer .footer-icon .icon-twitter{
+    background-image: url("../img/Icon/twitter (1).png");
+}
+footer .footer-icon .icon-instagram{
+    background-image: url("../img/Icon/instagram.png");
+}
+footer .footer-icon .icon-pinterest{
+    background-image: url("../img/Icon/pinterest-social-logo.png");
+}
+footer .footer-icon .icon-youtube{
+    background-image: url("../img/Icon/youtube-logotype.png");
+}
+footer .footer-icon .icon-appstore, footer .footer-icon .icon-googleplay{
+    width:100px;
+    border-radius: 1px;
+}
+footer .footer-icon .icon-appstore{
+    background-image: url("../img/Icon/iosAppBadge_small.png");
+    
+}
+footer .footer-icon .icon-googleplay{
+    background-image: url("../img/Icon/androidAppBadge_small.png");
+}
