@@ -18,15 +18,15 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(cors());
-//Http logger
-// app.use(morgan('combined'))
+Http logger
+app.use(morgan('combined'))
 
-//Template Engin
-// app.engine('hbs', handlebars({
-//   extname: '.hbs'
-// }));
-// app.set('view engine', 'hbs');
-// app.set('views', path.join(__dirname, 'resources/views'));
+Template Engin
+app.engine('hbs', handlebars({
+  extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'resources/views'));
 
 
 //Routes init
