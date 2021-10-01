@@ -22,9 +22,9 @@ app.use(cors());
 // app.use(morgan('combined'))
 
 //Template Engin
-app.engine('hbs', handlebars({
-  extname: '.hbs'
-}));
+// app.engine('hbs', handlebars({
+//   extname: '.hbs'
+// }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
