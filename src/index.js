@@ -18,10 +18,10 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(cors());
-Http logger
+// Http logger
 app.use(morgan('combined'))
 
-Template Engin
+// Template Engin
 app.engine('hbs', handlebars({
   extname: '.hbs'
 }));
