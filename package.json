@@ -1,0 +1,29 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass src/resources/scss/ --o src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daicatimmai123v30/Nodejs.git"
+  },
+  "author": "Le Dai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daicatimmai123v30/Nodejs/issues"
+  },
+  "homepage": "https://github.com/daicatimmai123v30/Nodejs#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12"
+  }
+}
