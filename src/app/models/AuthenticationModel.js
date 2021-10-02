@@ -24,7 +24,7 @@ const AuthenticationModel = new Schema({
         uppercase:true,
     },
     canceledStatus:{
-        type:Int8Array,
+        type:Number,
         default:0,
         min:0
     }
