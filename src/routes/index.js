@@ -7,6 +7,7 @@ const catalogIllnessRoute = require('./CatalogIllnessRoute');
 const clinicRoute= require ('./ClinicRoute');
 const illnessRoute = require ('./IllnessRoute');
 const messengerRoute = require('./MessengerRoutes');
+const AccountModel =require('../app/models/AccountMode')
 
 function route(app) {
 
@@ -20,17 +21,9 @@ function route(app) {
     app.use('/api/Illness',illnessRoute);
     app.use('/api/Messenger',messengerRoute);
 
-    app.get('/list/account',(request,response)=>{
-        return response.json([
-            {
-                title:'abc',
-                desc:'abc'
-            },
-            {
-                title:'xyz',
-                desc:'xyz'
-            }
-        ])
+    app.get('/list/account',async (request,response)=>{
+        const account= await AccountModel.find();
+        return response.json({account:account})
     })
     // app.get('/Home', (req, res) => {
     //     res.render('Home');
