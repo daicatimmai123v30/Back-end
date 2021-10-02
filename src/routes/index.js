@@ -22,8 +22,12 @@ function route(app) {
     app.use('/api/Messenger',messengerRoute);
 
     app.get('/list/account',async (request,response)=>{
-        const account= await AccountModel.find();
-        return response.json({account:account})
+        try {
+            const account= await AccountModel.find();
+            return response.json({account:account})
+        } catch (error) {
+            return response.json({success:false, message:'account cant not access'});
+        }
     })
     // app.get('/Home', (req, res) => {
     //     res.render('Home');
