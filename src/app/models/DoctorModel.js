@@ -34,22 +34,23 @@ const Doctor = new Schema({
         type: String,
         default: ''
     },
+    city: {
+        type: String,
+        default: ''
+    },
     distinct: {
         type: String,
         default: ''
     },
-    province: {
-        type: String,
-        default: ''
-    },
-    city: {
+    ward: {
         type: String,
         default: ''
     },
     zipCode: {
         type: String,
-       
-        default: ''
+        default: '',
+        maxlength:6,
+        minlength:6
     },
     account: {
         type: Schema.Types.ObjectId,

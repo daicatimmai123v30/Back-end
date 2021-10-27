@@ -7,7 +7,11 @@ const catalogIllnessRoute = require('./CatalogIllnessRoute');
 const clinicRoute= require ('./ClinicRoute');
 const illnessRoute = require ('./IllnessRoute');
 const messengerRoute = require('./MessengerRoutes');
-const AccountModel =require('../app/models/AccountMode')
+const OwnerRoute =require ('./OwnerRoute')
+const fs = require('fs');
+const path = require('path');
+
+
 
 function route(app) {
 
@@ -20,14 +24,36 @@ function route(app) {
     app.use('/api/Clinic',clinicRoute);
     app.use('/api/Illness',illnessRoute);
     app.use('/api/Messenger',messengerRoute);
-
+    app.use('/api/Owner', OwnerRoute);
+    //Reading and Writing file 
     app.get('/list/account',async (request,response)=>{
-        try {
-            const account= await AccountModel.find();
-            return response.json({account:account})
-        } catch (error) {
-            return response.json({success:false, message:'account cant not access'});
-        }
+        // let array =Array(0);
+        // let string ='';
+        
+        // for (let i=1;i<=387;i++){
+        //     if(String(i).length===1)
+        //         string='00'+String(i);
+        //     else if (String(i).length===2)
+        //         string='0'+String(i);
+        //     else
+        //         string =String(i);
+        //     try {
+        //         let rawdata = fs.readFileSync(path.resolve(__dirname, `test/${string}.json`));
+        //         let student = JSON.parse(rawdata);
+        //         array.push(student);
+        //     } catch (error) {
+        //     }
+        // }
+        // const jsonContent = JSON.stringify(array);
+
+        // fs.writeFile("./alphabet.json", jsonContent, 'utf8', function (err) {
+        //     if (err) {
+        //         return console.log(err);
+        //     }
+
+        //     console.log("The file was saved!");
+        // }); 
+        response.json({success:true,message:'Connected successfully'});
     })
     // app.get('/Home', (req, res) => {
     //     res.render('Home');

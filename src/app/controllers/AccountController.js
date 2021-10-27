@@ -4,6 +4,7 @@ const doctorModel = require('../models/DoctorModel');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
+
 class AccountController {
 
     showAll(request, response, next) {
@@ -127,7 +128,9 @@ class AccountController {
             const account = await accountModel.findById(request.userId).select('-password');
             if(!account)
                 return response.json({success:false,messege:'User not found'});
-            response.json({success:true,account});
+            const newAccount={...account,image:process.env.API_URL+account.image}
+            console.log(newAccount)
+            response.json({success:true,newAccount});
         } catch (error) {
             response.json({success:false,message:'Internal server error'});
         }

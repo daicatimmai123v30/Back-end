@@ -2,7 +2,7 @@ const mongoose  =require('mongoose');
 const Schema = mongoose.Schema;
 
 const AuthenticationModel = new Schema({
-    numberPhone:{
+    phoneNumber:{
         type:String,
         default:'',
         unique:true
@@ -17,11 +17,14 @@ const AuthenticationModel = new Schema({
         default:false
     },
     modifiedBy:{
-        type:String
+        type:String,
+        default:''
     },
     createdBy:{
         type:String,
         uppercase:true,
+        enum:['USER','VET'],
+        default:'USER'
     },
     canceledStatus:{
         type:Number,
@@ -30,4 +33,4 @@ const AuthenticationModel = new Schema({
     }
 },{timestamps:true});
 
-module.exports = mongoose.model('Authentication',AuthenticationModel);
+module.exports = mongoose.model('authentications',AuthenticationModel);
