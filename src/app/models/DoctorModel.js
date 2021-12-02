@@ -38,7 +38,7 @@ const Doctor = new Schema({
         type: String,
         default: ''
     },
-    distinct: {
+    district: {
         type: String,
         default: ''
     },
@@ -54,8 +54,25 @@ const Doctor = new Schema({
     },
     account: {
         type: Schema.Types.ObjectId,
-        ref:'accounts'
-    }
+        ref:'Accounts'
+    },
+    review:[{
+        idOwner:{
+            type:mongoose.Types.ObjectId,
+            default:null,
+            ref:'owners'
+        },
+        rating:{
+            type:Number,
+            default:0,
+            min:0,
+            max:5,
+        },
+        comments:{
+            type:String,
+            default:'',
+        }
+    }]
 }, {
     timestamps: true
 });

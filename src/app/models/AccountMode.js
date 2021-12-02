@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AccountModel = new Schema({
-    userName: {
+    username: {
         type: String,
         default: '',
         unique:true,
@@ -13,18 +13,18 @@ const AccountModel = new Schema({
     },
     role: {
         type: String,
-        default: 'CUSTOMER',
-        enum:['CUSTOMER','ADMIN'],
+        default: 'DOCTOR',
+        enum:['DOCTOR','ADMIN','NURSE'],
         uppercase: true
     },
     createdBy: {
         type: String,
-        default: 'customer',
+        default: 'ADMIN',
         uppercase: true
     },
     modifiedBy: {
         type: String,
-        default: 'customer',
+        default: 'ADMIN',
         uppercase: true
     }
 }, {

@@ -29,6 +29,35 @@ class OwnerController {
             })
         }
     }
+    async showAll(request,response){
+        try {
+            const findOwners = await OwnerModel.find({}).populate({path:'idNumber',select:'phoneNumber'})
+            const owners =findOwners.map(owner=>{
+                return{
+                    _id:owner._id,
+                    firstName:owner.firstName,
+                    lastName:owner.lastName,
+                    phoneNumber:owner.idNumber.phoneNumber,
+                    dateOfBirth:new Date(owner.dateOfBirth).toISOString().slice(0,-14),
+                    gender:owner.gender,
+                    image:process.env.API_URL+owner.image,
+                    street:owner.street,
+                    city:owner.city,
+                    district:owner.district,
+                    ward:owner.ward
+                }
+            })
+            return response.json({
+                success:true,
+                owners
+            })
+        } catch (error) {
+            return response.json({
+                success:false,
+                message:error.toString()
+            })
+        }
+    }
     
 }
 

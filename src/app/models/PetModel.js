@@ -2,31 +2,36 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const PetModel = new Schema({
-    type:{
-        type:String,
-        enum:['Chó','Mèo','Chim','Thỏ'],
-        required:true
-    },
     breed:{
         type:String,
+        enum:['Con Chó','Con Mèo','Con Chim','Con Thỏ'],
         required:true
+    },
+    species:{
+        type:String,
+        required:true,
+        default:''
     },
     namePet:{
         type:String,
         required:true,
+        default:''
     },
     gender:{
         type:String,
         enum:['Đực','Cái'],
-        required:true
+        required:true,
+        default:''
     },
     age:{
         type:Number,
-        default:0
+        default:0,
+        default:''
     },
     weight:{
         type:Number,
-        default:0
+        default:0,
+        default:''
     },
     statusPet:{
         type:String,
@@ -38,7 +43,10 @@ const PetModel = new Schema({
         enum:[''],
         default:''
     },
-    
+    avatar:{
+        type:String,
+        default:'',
+    },
     imagePet:[{
         image:{
             type:String,
@@ -52,8 +60,11 @@ const PetModel = new Schema({
         ref:'owners'
     },
     idIllness:{
-        type:mongoose.Types.ObjectId,
-        ref:'owners'
+        type:String,
+        default:''
     },
-
+},{
+    timestamps:true
 })
+
+module.exports =mongoose.model('pets',PetModel)

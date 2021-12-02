@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 const Scheme = mongoose.Schema;
 const appointment = new Scheme({
-    idOnwer: {
-        type: String,
-        default: ''
+    idOwner: {
+        type: mongoose.Types.ObjectId,
+        default: null,
+        ref:'owners'
     },
     idDoctor: {
-        type: String,
-        default: ''
+        type: mongoose.Types.ObjectId,
+        default: null,
+        ref:'Doctors'
     },
     createdBy: {
         type: String,
@@ -27,8 +29,32 @@ const appointment = new Scheme({
     },
     status: {
         type: String,
-        default: ''
+        enum:['CANCELED','WAITING','FINISHED','REQUESTING'],
+        default: 'REQUESTING',
+    },
+    idPet:{
+        type:mongoose.Types.ObjectId,
+        ref:'pets',
+        default:null,
+    },
+    content:{
+        type:String,
+        default:''
+    },
+    startDate:{
+        type:String,
+        default:''
+    },
+    endDate:{
+        type:String,
+        default:''
+    },
+    Location:{
+        type:mongoose.Types.ObjectId,
+        default:null,
     }
 }, {
     timestamps: true
 });
+
+module.exports = mongoose.model('appointments',appointment)

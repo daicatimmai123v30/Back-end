@@ -11,11 +11,13 @@ const OwnerModel = new Schema({
         default:''
     },
     dateOfBirth:{
-        type:Date
+        type:Date,
+        default:''
     },
     gender:{
         type:String,
-        enum:['Nam','Nữ','Giới tính thứ 3']
+        enum:['Nam','Nữ','Giới tính thứ 3'],
+        default:''
     },
     cmnd:{
         type:String,
@@ -26,16 +28,20 @@ const OwnerModel = new Schema({
         default:''
     },
     street:{
-        type:String
+        type:String,
+        default:''
     },
     city:{
-        type:String
+        type:String,
+        default:''
     },
     district:{
-        type:String
+        type:String,
+        default:''
     },
     ward:{
-        type:String
+        type:String,
+        default:''
     },
     // zipCode:{
     //     type:String,
@@ -44,7 +50,7 @@ const OwnerModel = new Schema({
     // },
     idNumber:{
         type:Schema.Types.ObjectId,
-        ref:'authentication'
+        ref:'authentications'
     }
 });
 

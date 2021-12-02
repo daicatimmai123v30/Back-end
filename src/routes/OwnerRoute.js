@@ -28,5 +28,6 @@ const upload =multer({storage: storage,
 })
 
 router.post('/upload_image_profile',auth,upload.single('profile'),OwnerController.updateProfile);
+router.get('/list-pet-owner',auth,OwnerController.showAll)
 
 module.exports=router;

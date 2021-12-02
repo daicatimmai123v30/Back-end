@@ -8,22 +8,25 @@ const route = require('./routes');
 const db = require('./config/db/index');
 const http = require('http');
 const socketio = require('socket.io');
-const Account = require('../src/app/models/AccountMode');
-const jwt = require('jsonwebtoken')
-
+const session = require('express-session')
+const MongoStore = require('connect-mongo');
 
 
 require('dotenv').config();
 
 
 const server = http.createServer();
-const io = socketio(server,{});
+const io = socketio(server,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 server.listen(4441);
 
 
 // Init our socket
  
-
 db.connection();
 app.use('/images',express.static(path.join(__dirname, 'public/img')));
 // app.use('/images', express.static('images')); 
@@ -33,37 +36,14 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(cors());
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/Artemis' })
+}));
 // Http logger
 app.use(morgan('combined'))
-
-
-
-app.get('/signin',async(request,response)=>{
-  try {
-    const {userName,password}=request.body;
-    const findAccount=await Account.findOne({userName:userName});
-    if(findAccount){
-      const token = await jwt.sign({_id:findAccount._id,userName:findAccount.userName},'adjs123kknxcv1123x13a');
-      return response.json({
-        success:true,
-        message:'Dang nhap thanh cong',
-        token,
-
-      })
-    }
-    else
-      return response.json({
-        success:false,
-        message:'Username khong ton tai'
-      })
-  } catch (error) {
-    return response.json({
-      success:false,
-      message:'Loi Server'
-    })
-  }
-})
-
 
 
 

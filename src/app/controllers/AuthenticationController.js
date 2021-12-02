@@ -2,7 +2,7 @@ const authenticationModel = require('../models/AuthenticationModel')
 const ownerModel =require('../models/OwnerModel');
 const jwt = require('jsonwebtoken');
 const argon =require('argon2');
-
+const firebase =require('../../config/firebase')
 class AuthenticationController{
 
     //POST api/Authentication/login
@@ -38,7 +38,7 @@ class AuthenticationController{
                         success:true,
                         token,
                         owner:{
-                            _id:authentication._id,
+                            _id:owner._id,
                             phoneNumber:authentication.phoneNumber,
                             firstName:owner.firstName,
                             lastName:owner.lastName,
@@ -72,7 +72,7 @@ class AuthenticationController{
                 return response.json({
                     success:true,
                     owner:{
-                        _id:authentication._id,
+                        _id:owner._id,
                         phoneNumber:authentication.phoneNumber,
                         firstName:owner.firstName,
                         lastName:owner.lastName,
@@ -144,7 +144,6 @@ class AuthenticationController{
             district,
             ward
         }=request.body;
-      
         if(!phoneNumber || !password)
             return response.json({
                 success:false,
@@ -177,9 +176,10 @@ class AuthenticationController{
                 city,
                 district,
                 ward,
+                image:'/images/owner/616938d4c3e6e3673b2b808c.jpg',
                 idNumber: newAuthenticaiton._id
             });
-            owner.save();
+            await owner.save();
             return response.json({
                 success:true,
                 message:'Đăng ký thành công',
@@ -205,7 +205,9 @@ class AuthenticationController{
         }
 
     }
-    
+
+
+
     
 }
 

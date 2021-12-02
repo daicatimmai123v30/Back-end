@@ -8,18 +8,33 @@ module.exports = (io)=>{
     io.on('connection',function (socket){
 
         socket.on('getDoctors',async ({_id})=>{
-            var doctors  = await ownerModel.find({})
-            var authentication =await authenticationModel.find({})
+            var doctors  = await doctorModel.find({})
             doctors = doctors
-            .filter((doctor)=>{
-                return (doctor.idNumber.toString()===_id?false:true)
+            .map(doctor=>{
+                return {
+                    _id:doctor._id,
+                    firstName:doctor.firstName,
+                    lastName:doctor.lastName,
+                    dateOfBirth:doctor.dateOfBirth,
+                    phoneNumber:doctor.phoneNumber,
+                    gender:doctor.gender,
+                    image:process.env.API_URL+ doctor.image,
+                    street:doctor.street,
+                    city:doctor.city,
+                    district:doctor.district,
+                    ward:doctor.ward,
+                    zipCode:doctor.zipCode}
             })
-            .map( (doctor)=>{
-                const newAuthentication = authentication.filter((auth)=>(auth._id.toString()===doctor.idNumber.toString())?true:false)
-                doctor.image = process.env.API_URL+doctor.image
-                doctor._id = newAuthentication[0]._id
-                return doctor
-            });
+            .filter((doctor)=>{
+                return (doctor?.idNumber?.toString()===_id?false:true)
+            })
+            // .map( (doctor)=>{
+            //     const newAuthentication = authentication.filter((auth)=>(auth._id.toString()===doctor.idNumber.toString())?true:false)
+            //     doctor.image = process.env.API_URL+doctor.image
+            //     doctor._id = newAuthentication[0]._id
+            //     return doctor
+            // });
+
             socket.emit('getAllDoctors',doctors);
         });
 
@@ -27,38 +42,41 @@ module.exports = (io)=>{
 
             if(!uniqueChat.recieverId)
                 console.log('id người nhận không có');
-            const user = {recieverId:uniqueChat.recieverId,senderId:uniqueChat.senderId}
-            const chat = await Chats.aggregate().match({
+            else{
+                const user = {recieverId:uniqueChat.recieverId,senderId:uniqueChat.senderId}
+                const chat = await Chats.aggregate().match({
                 recieverId:user.recieverId,
                 senderId:user.senderId
-            });
-            if(chat.length>0)
-            {
-                socket.emit('openChat',{...chat[0]});
-            }
-            else{
-                const chatAttempt=await Chats.aggregate([
-                    {
-                        $match:{
-                            recieverId:user.recieverId,
-                            senderId:user.senderId
-                        }
-                    }
-                ]);
-                if(chatAttempt.length>0)
-                    socket.emit('openChat',{...chatAttempt[0]});
-                else
+                });
+                if(chat.length>0)
                 {
-                    // Store the new Chat 
-                    const newChat =await new Chats({
-                        ...user,
-                        roomId:uuidv4()
-                    }).save();
-                    socket.emit('openChat',newChat);
-                   
+                    socket.emit('openChat',{...chat[0]});
+                }
+                else{
+                    const chatAttempt=await Chats.aggregate([
+                        {
+                            $match:{
+                                recieverId:user.recieverId,
+                                senderId:user.senderId
+                            }
+                        }
+                    ]);
+                    if(chatAttempt.length>0)
+                        socket.emit('openChat',{...chatAttempt[0]});
+                    else
+                    {
+                        // Store the new Chat 
+                        const newChat =await new Chats({
+                            ...user,
+                            roomId:uuidv4()
+                        }).save();
+                        socket.emit('openChat',newChat);
                     
+                        
+                    }
                 }
             }
+            
         });
 
         socket.on('joinTwoUsers',({roomId},dispatch)=>{
@@ -70,9 +88,8 @@ module.exports = (io)=>{
         //load messanges
        
         socket.on('loadMessages',async({senderId,recieverId},dispatch)=>{
-            const messages=await Messages.find({})
+            const messages=await Messages.find({}).or([{senderId},{recieverId:senderId}])
             
-           
             return dispatch(messages.filter((mess)=>(
                 (mess.senderId===senderId||mess.recieverId===senderId)&&(mess.senderId===recieverId||mess.recieverId===recieverId)
             )));

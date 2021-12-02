@@ -7,7 +7,8 @@ const catalogIllnessRoute = require('./CatalogIllnessRoute');
 const clinicRoute= require ('./ClinicRoute');
 const illnessRoute = require ('./IllnessRoute');
 const messengerRoute = require('./MessengerRoutes');
-const OwnerRoute =require ('./OwnerRoute')
+const OwnerRoute =require ('./OwnerRoute');
+const PetRoute = require('./PetRoute')
 const fs = require('fs');
 const path = require('path');
 
@@ -25,6 +26,7 @@ function route(app) {
     app.use('/api/Illness',illnessRoute);
     app.use('/api/Messenger',messengerRoute);
     app.use('/api/Owner', OwnerRoute);
+    app.use('/api/Pet', PetRoute);
     //Reading and Writing file 
     app.get('/list/account',async (request,response)=>{
         // let array =Array(0);

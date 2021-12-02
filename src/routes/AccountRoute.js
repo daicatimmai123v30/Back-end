@@ -5,7 +5,6 @@ const auth =require('../app/middleware/auth');
 
 router.post('/register',accountController.register);
 router.post('/login',accountController.login);
-router.post('/account',auth,accountController.findOne);
 router.get('/',auth,accountController.checkToken);
 
 

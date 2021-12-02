@@ -13,6 +13,10 @@ const MessageModel = new Schema({
     textMessage:{
         type:String,
         required:true
+    },
+    isRead:{
+        type:Boolean,
+        default:false,
     }
 },{timestamps:true});
 

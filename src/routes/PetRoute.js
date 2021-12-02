@@ -3,14 +3,15 @@ const router = express.Router();
 const PetController = require('../app/controllers/PetController');
 const auth =require('../app/middleware/auth');
 const multer =require('multer')
-
+const {v4:uuidv4} = require('uuid');
 
 const storage = multer.diskStorage({
     destination:function(request,file,callback){
         callback(null,'./src/public/img/pet/');
     },  
     filename: function(request,file,callback){
-          callback(null,'' +file.originalname);
+
+          callback(null,'' +uuidv4()+file.originalname.split(file.originalname.length-1));
     }
 })
 
@@ -28,7 +29,7 @@ const upload =multer({storage: storage,
       },
     fileFilter: fileFilter
 })
-
-router.post('/upload_image_pet',auth,upload.single('profile'),OwnerController.updateProfile);
+router.get('/list-pet',auth,PetController.showByOwnerId);
+router.post('/',auth,upload.array('images',5),PetController.addPet);
 
 module.exports=router;
