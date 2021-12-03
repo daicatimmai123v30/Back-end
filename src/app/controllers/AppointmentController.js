@@ -87,7 +87,7 @@ class AppointmentController{
                 })
             }else
             {
-                const appointments = await appointmentModal.find({idOwner:request.userId}).populate('idOwner').populate('idPet').populate('idDoctor');
+                const appointments = await appointmentModal.find({idOwner:request.userId.toString()}).populate('idOwner').populate('idPet').populate('idDoctor');
                 return response.json({
                     success:true,
                     appointments

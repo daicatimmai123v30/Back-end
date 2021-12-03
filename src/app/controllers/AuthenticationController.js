@@ -8,7 +8,6 @@ class AuthenticationController{
     //POST api/Authentication/login
     async login(request,response){
         const {phoneNumber,password}=request.body;
-
         if(!phoneNumber ||!password)
             return response.json({
                 success:false,
@@ -16,8 +15,7 @@ class AuthenticationController{
             })
         else{
             try {
-                const authentication = await authenticationModel.findOne({phoneNumber});
-            
+                const authentication = await authenticationModel.findOne({phoneNumber:[phoneNumber,"0"+phoneNumber.slice(3,phoneNumber.length)]});
                 if(!authentication)
                     return response.json({
                         success:false,
@@ -32,7 +30,7 @@ class AuthenticationController{
                         })
                     const owner = await ownerModel.findOne({idNumber:authentication._id});
                     const token =await  jwt.sign({
-                        _id:authentication._id
+                        _id:owner._id
                     },process.env.ACCESS_TOKEN_SECRET);
                     return response.json({
                         success:true,
@@ -65,15 +63,15 @@ class AuthenticationController{
     async checkToken(request,response)
     {
         try {
-            const authentication = await authenticationModel.findOne({_id:request._id}).select('-password');
-            const owner = await ownerModel.findOne({idNumber:authentication._id});
             
-            if(authentication)
+            const owner = await ownerModel.findOne({_id:request._id}).populate('idNumber');
+            console.log(owner)
+            if(owner)
                 return response.json({
                     success:true,
                     owner:{
                         _id:owner._id,
-                        phoneNumber:authentication.phoneNumber,
+                        phoneNumber:owner.idNumber.phoneNumber,
                         firstName:owner.firstName,
                         lastName:owner.lastName,
                         dateOfBirth:new Date(owner.dateOfBirth).toISOString().slice(0,-14),
