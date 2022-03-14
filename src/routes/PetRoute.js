@@ -10,7 +10,6 @@ const storage = multer.diskStorage({
         callback(null,'./src/public/img/pet/');
     },  
     filename: function(request,file,callback){
-
           callback(null,'' +uuidv4()+file.originalname.split(file.originalname.length-1));
     }
 })
@@ -25,11 +24,13 @@ const fileFilter = (req, file, cb) => {
   };
 const upload =multer({storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 5
+        fileSize: 1024 * 1024 * 10
       },
     fileFilter: fileFilter
 })
 router.get('/list-pet',auth,PetController.showByOwnerId);
+router.get('/list-pet/:id',auth,PetController.showByPetId);
+router.delete('/:id',auth,PetController.deletePet)
 router.post('/',auth,upload.array('images',5),PetController.addPet);
 
 module.exports=router;

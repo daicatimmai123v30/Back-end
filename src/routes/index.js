@@ -8,7 +8,9 @@ const clinicRoute= require ('./ClinicRoute');
 const illnessRoute = require ('./IllnessRoute');
 const messengerRoute = require('./MessengerRoutes');
 const OwnerRoute =require ('./OwnerRoute');
-const PetRoute = require('./PetRoute')
+const PetRoute = require('./PetRoute');
+const ScheduleRoute =require('./ScheduleRoute')
+const ClinicRoute = require('./ClinicRoute');
 const fs = require('fs');
 const path = require('path');
 
@@ -22,11 +24,17 @@ function route(app) {
     app.use('/api/Appointment',appointmentRoute);
     app.use('/api/Authentication',authenticatrionRoute);
     app.use('/api/CatalogIllness',catalogIllnessRoute);
-    app.use('/api/Clinic',clinicRoute);
+    // app.use('/api/Clinic',clinicRoute);
     app.use('/api/Illness',illnessRoute);
     app.use('/api/Messenger',messengerRoute);
     app.use('/api/Owner', OwnerRoute);
     app.use('/api/Pet', PetRoute);
+    app.use('/api/Schedule', ScheduleRoute);
+    app.use('/api/Clinic', ClinicRoute);
+    app.post('/test',(request,response)=>{
+        console.log(request.body.items);
+        return response.json({})
+    })
     //Reading and Writing file 
     app.get('/list/account',async (request,response)=>{
         // let array =Array(0);
